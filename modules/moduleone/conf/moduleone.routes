@@ -1,1 +1,2 @@
 GET /hello           controllers.ModuleOneController.hello
+GET /user-agent      controllers.ModuleOneController.userAgent

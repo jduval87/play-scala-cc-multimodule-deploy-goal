@@ -15,9 +15,11 @@ lazy val moduleone = (project in file("modules/moduleone"))
   .settings(
     name := "moduleone",
     scalaVersion := "2.13.18",
-    Compile / packageDoc / mappings := Seq()
+    Compile / packageDoc / mappings := Seq(),
+    libraryDependencies += ws
   )
   .dependsOn(common)
+//#CC-moduleone
 
 lazy val moduletwo = (project in file("modules/moduletwo"))
   .enablePlugins(PlayScala, JavaAppPackaging)
@@ -27,6 +29,7 @@ lazy val moduletwo = (project in file("modules/moduletwo"))
     Compile / packageDoc / mappings := Seq()
   )
   .dependsOn(common)
+//#CC-moduletwo
 
 lazy val root = (project in file("."))
   .settings(
@@ -34,4 +37,7 @@ lazy val root = (project in file("."))
     scalaVersion := "2.13.18",
     scalacOptions ++= Seq("-feature", "-deprecation")
   )
-  .aggregate(moduleone, moduletwo)
+  .aggregate( // prevent reformat
+    moduleone,
+    moduletwo,
+  )
